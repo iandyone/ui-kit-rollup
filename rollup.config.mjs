@@ -1,24 +1,30 @@
 import json from '@rollup/plugin-json';
 import terser from '@rollup/plugin-terser';
 import clearOutput from 'rollup-plugin-delete';
+import typescript from '@rollup/plugin-typescript';
 
 export default {
   input: {
-    index: 'src/index.js',
-    'button/index': 'src/button/index.js',
+    index: 'src/index.ts',
+    'button/index': 'src/button/index.ts',
   },
   output: [
     {
-      dir: 'dist/es',
+      dir: 'dist',
       format: 'es',
-      entryFileNames: '[name].js',
+      entryFileNames: 'es/[name].js',
     },
     {
-      dir: 'dist/cjs',
+      dir: 'dist',
       format: 'cjs',
-      entryFileNames: '[name].js',
+      entryFileNames: 'cjs/[name].js',
     },
   ],
 
-  plugins: [json(), terser(), clearOutput({ targets: 'dist' })],
+  plugins: [
+    json(),
+    terser(),
+    clearOutput({ targets: 'dist' }),
+    typescript({ tsconfig: './tsconfig.build.json' }),
+  ],
 };
