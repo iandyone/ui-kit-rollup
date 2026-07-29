@@ -13,14 +13,16 @@ export default {
       dir: 'dist',
       format: 'es',
       entryFileNames: 'es/[name].js',
+      chunkFileNames: 'es/chunks/[name]-[hash].js',
     },
     {
       dir: 'dist',
       format: 'cjs',
       entryFileNames: 'cjs/[name].js',
+      chunkFileNames: 'cjs/chunks/[name]-[hash].js',
     },
   ],
-
+  external: ['react', 'react-dom', 'react/jsx-runtime'],
   plugins: [
     json(),
     terser(),
