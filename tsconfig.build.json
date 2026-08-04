@@ -2,12 +2,11 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "sourceMap": false,
-    
+
     "declaration": false,
     "declarationMap": false,
     "declarationDir": null,
 
-    // Не создавать ts->js, только файлы декларации типов
     "emitDeclarationOnly": false
   }
 }

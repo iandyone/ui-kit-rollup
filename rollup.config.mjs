@@ -2,6 +2,7 @@ import json from '@rollup/plugin-json';
 import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
 import clearOutput from 'rollup-plugin-delete';
+import postcss from 'rollup-plugin-postcss';
 
 export default {
   input: {
@@ -22,11 +23,16 @@ export default {
       chunkFileNames: 'cjs/chunks/[name]-[hash].js',
     },
   ],
-  external: ['react', 'react-dom', 'react/jsx-runtime'],
+  external: ['react', 'react-dom', 'react/jsx-runtime', 'classnames'],
   plugins: [
     json(),
     terser(),
     clearOutput({ targets: 'dist' }),
     typescript({ tsconfig: './tsconfig.build.json' }),
+    postcss({
+      extract: 'assets/styles.css',
+      minimize: true,
+      modules: true,
+    }),
   ],
 };

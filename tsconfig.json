@@ -5,8 +5,6 @@
     // Корень исходников относительно которого резолвятся пути emit
     "rootDir": ".",
 
-    // Каталог для сгенерированного JS и деклараций
-    // "outDir": "./dist",
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
@@ -31,7 +29,7 @@
     "emitDeclarationOnly": true,
 
     // Source maps для файлов деклараций
-    // В IDE потребитель может кликнуть “Go to definition” и попасть не в .d.ts, а ближе к исходному .ts, 
+    // В IDE потребитель может кликнуть “Go to definition” и попасть не в .d.ts, а ближе к исходному .ts,
     // если исходники тоже опубликованы и sourcemap корректный.
     "declarationMap": false,
 
@@ -44,7 +42,7 @@
     // Style Options
 
     // Ошибка на неиспользуемые локальные переменные
-    // "noUnusedLocals": true,
+    "noUnusedLocals": true,
 
     // Ошибка на неиспользуемые параметры функций
     "noUnusedParameters": true,
@@ -73,5 +71,7 @@
 
     // Не проверять типы в .d.ts из node_modules (быстрее сборка)
     "skipLibCheck": true
-  }
+  },
+  "include": ["src/**/*", "../vitest.config.ts", "src/global.d.ts"],
+  "exclude": ["src/**/*.stories.*"]
 }
