@@ -9,16 +9,24 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:js": "rollup --config",
     "build:types": "tsc",
-    "build": "npm run build:js && npm run build:types"
+    "build": "npm run build:js && npm run build:types",
+    "lint": "eslint ."
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.5",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-terser": "^1.0.0",
     "@rollup/plugin-typescript": "^12.3.0",
+    "eslint": "^9.39.5",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "jiti": "^2.7.0",
     "rollup": "^4.62.3",
     "rollup-plugin-delete": "^3.0.2",
     "tslib": "^2.8.1",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.66.0"
   },
   "types": "./dist/types/index.d.ts",
   "exports": {

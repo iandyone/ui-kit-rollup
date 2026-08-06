@@ -3,7 +3,7 @@
   "compilerOptions": {
     // File Layout
     // Корень исходников относительно которого резолвятся пути emit
-    "rootDir": "./src",
+    "rootDir": ".",
 
     // Каталог для сгенерированного JS и деклараций
     // "outDir": "./dist",
@@ -38,7 +38,7 @@
     // Stricter Typechecking Options
     // Индексный доступ даёт T | undefined
     "noUncheckedIndexedAccess": true,
-    // optional-свойства нельзя явно задаватькак undefined, если тип этого не допускает
+    // optional-свойства нельзя явно задавать как undefined, если тип этого не допускает
     "exactOptionalPropertyTypes": true,
 
     // Style Options

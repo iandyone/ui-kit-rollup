@@ -1,7 +1,7 @@
 import json from '@rollup/plugin-json';
 import terser from '@rollup/plugin-terser';
-import clearOutput from 'rollup-plugin-delete';
 import typescript from '@rollup/plugin-typescript';
+import clearOutput from 'rollup-plugin-delete';
 
 export default {
   input: {
