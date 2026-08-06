@@ -1,10 +1,15 @@
-import type { MouseEventHandler } from 'react';
+import type { ButtonHTMLAttributes, MouseEventHandler } from 'react';
 
 export type ButtonColors = 'default' | 'inverted';
 
 export type ButtonView = 'primary' | 'secondary' | 'outlined' | 'text';
 
-export interface ButtonProps {
+type NativeButtonProps = Omit<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  'className' | 'disabled' | 'onClick' | 'type'
+>;
+
+export interface ButtonProps extends NativeButtonProps {
   colors?: ButtonColors;
   view?: ButtonView;
   label?: string;
@@ -14,5 +19,4 @@ export interface ButtonProps {
   disabled?: HTMLButtonElement['disabled'];
   type?: HTMLButtonElement['type'];
   onClick?: MouseEventHandler<HTMLButtonElement>;
-  [key: string]: any;
 }

@@ -2,9 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn, expect } from 'storybook/test';
 
 import { Button } from './button';
+import styles from './button.module.css';
 import { type ButtonProps } from './types';
 
-import styles from './button.module.css';
 
 const DEFAULT_BUTTON_PROPS: ButtonProps = {
   label: 'Button',
