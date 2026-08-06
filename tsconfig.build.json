@@ -8,5 +8,6 @@
     "declarationDir": null,
 
     "emitDeclarationOnly": false
-  }
+  },
+  "exclude": ["src/**/*.stories.*"]
 }

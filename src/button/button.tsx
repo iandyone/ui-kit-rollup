@@ -23,9 +23,11 @@ export const Button: FC<ButtonProps> = (props) => {
     disabled = false,
     label = '',
     type = 'button',
+    dataTestId = '',
     ariaLabel,
     className: externalClassName,
     onClick,
+    ...buttonProps
   } = props;
 
   return (
@@ -40,7 +42,9 @@ export const Button: FC<ButtonProps> = (props) => {
       )}
       disabled={disabled}
       type={type}
+      data-test-id={dataTestId}
       onClick={onClick}
+      {...buttonProps}
     >
       {label}
     </button>

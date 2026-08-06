@@ -9,12 +9,12 @@
     "node": ">=22.14.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build:js": "rollup --config",
     "build:types": "tsc",
     "build": "npm run build:js && npm run build:types",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "test": "vitest run --project=storybook --coverage",
     "lint": "eslint ."
   },
   "dependencies": {
