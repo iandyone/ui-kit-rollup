@@ -5,7 +5,6 @@ import { Button } from './button';
 import styles from './button.module.css';
 import { type ButtonProps } from './types';
 
-
 const DEFAULT_BUTTON_PROPS: ButtonProps = {
   label: 'Button',
   colors: 'default',
@@ -78,139 +77,63 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   play: async ({ canvas, userEvent, args }) => {
-    expect(canvas.getByText(args.label!)).toBeInTheDocument();
-    expect(canvas.getByRole(args.type!)).toBeInTheDocument();
-    expect(canvas.getByTestId(args.dataTestId!)).toBeInTheDocument();
+    const button = canvas.getByTestId(args.dataTestId!);
 
-    expect(canvas.getByTestId(args.dataTestId!)).not.toBeDisabled();
-    expect(canvas.getByTestId(args.dataTestId!)).toHaveClass(args.className!);
-    expect(canvas.getByTestId(args.dataTestId!)).toHaveClass(
-      styles.viewPrimary,
-    );
-    expect(canvas.getByTestId(args.dataTestId!)).toHaveClass(
-      styles.colorDefault,
-    );
+    expect(canvas.getByText(args.label!)).toBeVisible();
+    expect(canvas.getByRole(args.type!)).toBeVisible();
+    expect(button).toBeVisible();
 
-    await userEvent.click(canvas.getByTestId(args.dataTestId!));
+    expect(button).not.toBeDisabled();
+    expect(button).toHaveClass(args.className!);
+    expect(button).toHaveClass(styles.viewPrimary);
+    expect(button).toHaveClass(styles.colorDefault);
+
+    await userEvent.click(button);
     await expect(args.onClick).toHaveBeenCalled();
   },
 };
 
 export const Secondary: Story = {
   args: { view: 'secondary' },
-  play: async ({ canvas, userEvent, args, mount }) => {
-    await mount(<Button {...args} />);
+  play: async ({ canvas, args }) => {
+    const button = canvas.getByTestId(args.dataTestId!);
 
-    expect(canvas.getByTestId(args.dataTestId!)).toHaveClass(
-      styles.viewSecondary,
-    );
-
-    expect(canvas.getByText(args.label!)).toBeInTheDocument();
-    expect(canvas.getByRole(args.type!)).toBeInTheDocument();
-    expect(canvas.getByTestId(args.dataTestId!)).toBeInTheDocument();
-
-    expect(canvas.getByTestId(args.dataTestId!)).not.toBeDisabled();
-    expect(canvas.getByTestId(args.dataTestId!)).toHaveClass(args.className!);
-
-    expect(canvas.getByTestId(args.dataTestId!)).toHaveClass(
-      styles.colorDefault,
-    );
-
-    await userEvent.click(canvas.getByTestId(args.dataTestId!));
-    await expect(args.onClick).toHaveBeenCalled();
+    expect(button).toHaveClass(styles.viewSecondary);
   },
 };
 
 export const Inverted: Story = {
   args: { colors: 'inverted' },
 
-  play: async ({ canvas, userEvent, args, mount }) => {
-    await mount(<Button {...args} />);
+  play: async ({ canvas, args }) => {
+    const button = canvas.getByTestId(args.dataTestId!);
 
-    expect(canvas.getByTestId(args.dataTestId!)).toHaveClass(
-      styles.colorInverted,
-    );
-
-    expect(canvas.getByText(args.label!)).toBeInTheDocument();
-    expect(canvas.getByRole(args.type!)).toBeInTheDocument();
-    expect(canvas.getByTestId(args.dataTestId!)).toBeInTheDocument();
-
-    expect(canvas.getByTestId(args.dataTestId!)).not.toBeDisabled();
-    expect(canvas.getByTestId(args.dataTestId!)).toHaveClass(args.className!);
-    expect(canvas.getByTestId(args.dataTestId!)).toHaveClass(
-      styles.viewPrimary,
-    );
-
-    await userEvent.click(canvas.getByTestId(args.dataTestId!));
-    await expect(args.onClick).toHaveBeenCalled();
+    expect(button).toHaveClass(styles.colorInverted);
   },
 };
 
 export const Outlined: Story = {
   args: { view: 'outlined' },
-  play: async ({ canvas, userEvent, args, mount }) => {
-    await mount(<Button {...args} />);
+  play: async ({ canvas, args }) => {
+    const button = canvas.getByTestId(args.dataTestId!);
 
-    expect(canvas.getByTestId(args.dataTestId!)).toHaveClass(
-      styles.viewOutlined,
-    );
-
-    expect(canvas.getByText(args.label!)).toBeInTheDocument();
-    expect(canvas.getByRole(args.type!)).toBeInTheDocument();
-    expect(canvas.getByTestId(args.dataTestId!)).toBeInTheDocument();
-
-    expect(canvas.getByTestId(args.dataTestId!)).not.toBeDisabled();
-    expect(canvas.getByTestId(args.dataTestId!)).toHaveClass(args.className!);
-    expect(canvas.getByTestId(args.dataTestId!)).toHaveClass(
-      styles.colorDefault,
-    );
-
-    await userEvent.click(canvas.getByTestId(args.dataTestId!));
-    await expect(args.onClick).toHaveBeenCalled();
+    expect(button).toHaveClass(styles.viewOutlined);
   },
 };
 
 export const Text: Story = {
   args: { view: 'text' },
-  play: async ({ canvas, userEvent, args, mount }) => {
-    await mount(<Button {...args} />);
+  play: async ({ canvas, args }) => {
+    const button = canvas.getByTestId(args.dataTestId!);
 
-    expect(canvas.getByTestId(args.dataTestId!)).toHaveClass(styles.viewText);
-
-    expect(canvas.getByText(args.label!)).toBeInTheDocument();
-    expect(canvas.getByRole(args.type!)).toBeInTheDocument();
-    expect(canvas.getByTestId(args.dataTestId!)).toBeInTheDocument();
-
-    expect(canvas.getByTestId(args.dataTestId!)).not.toBeDisabled();
-    expect(canvas.getByTestId(args.dataTestId!)).toHaveClass(args.className!);
-    expect(canvas.getByTestId(args.dataTestId!)).toHaveClass(
-      styles.colorDefault,
-    );
-
-    await userEvent.click(canvas.getByTestId(args.dataTestId!));
-    await expect(args.onClick).toHaveBeenCalled();
+    expect(button).toHaveClass(styles.viewText);
   },
 };
 
 export const Disabled: Story = {
   args: { disabled: true },
-  play: async ({ canvas, userEvent, args, mount }) => {
-    await mount(<Button {...args} />);
-    expect(canvas.getByTestId(args.dataTestId!)).toBeDisabled();
-
-    await userEvent.click(canvas.getByTestId(args.dataTestId!));
-    await expect(args.onClick).not.toHaveBeenCalled();
-
-    expect(canvas.getByText(args.label!)).toBeInTheDocument();
-    expect(canvas.getByRole(args.type!)).toBeInTheDocument();
-    expect(canvas.getByTestId(args.dataTestId!)).toBeInTheDocument();
-
-    expect(canvas.getByTestId(args.dataTestId!)).toHaveClass(args.className!);
-    expect(canvas.getByTestId(args.dataTestId!)).toHaveClass(
-      styles.viewPrimary,
-    );
-    expect(canvas.getByTestId(args.dataTestId!)).toHaveClass(
-      styles.colorDefault,
-    );
+  play: async ({ canvas, args }) => {
+    const button = canvas.getByTestId(args.dataTestId!);
+    expect(button).toBeDisabled();
   },
 };

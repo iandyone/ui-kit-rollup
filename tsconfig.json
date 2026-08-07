@@ -3,7 +3,7 @@
   "compilerOptions": {
     // File Layout
     // Корень исходников относительно которого резолвятся пути emit
-    "rootDir": ".",
+    "rootDir": "./src",
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module

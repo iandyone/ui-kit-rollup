@@ -59,16 +59,21 @@
   },
   "types": "./dist/types/index.d.ts",
   "exports": {
+    "./styles.css": "./dist/assets/styles.css",
     ".": {
       "types": "./dist/types/index.d.ts",
       "import": "./dist/es/index.js",
       "require": "./dist/cjs/index.js"
     },
-    "./styles.css": "./dist/assets/styles.css",
     "./button": {
       "types": "./dist/types/button/index.d.ts",
       "import": "./dist/es/button/index.js",
       "require": "./dist/cjs/button/index.js"
+    },
+    "./input": {
+      "types": "./dist/types/input/index.d.ts",
+      "import": "./dist/es/input/index.js",
+      "require": "./dist/cjs/input/index.js"
     }
   }
 }

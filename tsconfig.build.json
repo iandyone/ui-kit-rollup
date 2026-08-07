@@ -9,5 +9,5 @@
 
     "emitDeclarationOnly": false
   },
-  "exclude": ["src/**/*.stories.*"]
+  "exclude": ["**/*.stories.*"]
 }
