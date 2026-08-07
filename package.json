@@ -1,0 +1,14 @@
+{
+  "name": "ui-kit",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "rollup": "^4.62.3"
+  }
+}
