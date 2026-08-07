@@ -9,6 +9,7 @@ export default {
     index: 'src/index.ts',
     'button/index': 'src/button/index.ts',
     'input/index': 'src/input/index.ts',
+    'typography/index': 'src/typography/index.ts',
   },
   output: [
     {
