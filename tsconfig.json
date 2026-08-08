@@ -71,5 +71,5 @@
     // Не проверять типы в .d.ts из node_modules (быстрее сборка)
     "skipLibCheck": true
   },
-  "include": ["src/**/*", "../vitest.config.ts", "src/global.d.ts"]
+  "include": ["src/**/*",  "src/global.d.ts"]
 }
