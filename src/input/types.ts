@@ -4,26 +4,26 @@ export type InputView = 'default' | 'error';
 
 export type InputSize = 'small' | 'medium';
 
-type NativeInputProps = Omit<
+type NativeInputProps = Pick<
   InputHTMLAttributes<HTMLInputElement>,
-  | 'className'
   | 'disabled'
-  | 'onChange'
+  | 'id'
+  | 'maxLength'
+  | 'minLength'
+  | 'name'
+  | 'onBlur'
+  | 'onFocus'
   | 'placeholder'
-  | 'size'
+  | 'required'
   | 'type'
-  | 'value'
 >;
 
 export interface InputProps extends NativeInputProps {
   value?: string;
   label?: string;
   description?: string;
-  placeholder?: HTMLInputElement['placeholder'];
   view?: InputView;
   size?: InputSize;
-  disabled?: HTMLInputElement['disabled'];
-  type?: HTMLInputElement['type'];
   error?: string;
   labelClassName?: string;
   inputClassName?: string;

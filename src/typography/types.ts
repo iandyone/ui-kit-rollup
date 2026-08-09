@@ -6,9 +6,15 @@ export type TypographyColor = 'default' | 'muted' | 'accent' | 'danger';
 
 export type TypographyWeight = 'regular' | 'medium' | 'bold';
 
-type NativeTypographyProps = Omit<
+type NativeTypographyProps = Pick<
   HTMLAttributes<HTMLElement>,
-  'className' | 'color'
+  | 'id'
+  | 'onBlur'
+  | 'onClick'
+  | 'onFocus'
+  | 'role'
+  | 'tabIndex'
+  | 'title'
 >;
 
 export interface TypographyProps extends NativeTypographyProps {
