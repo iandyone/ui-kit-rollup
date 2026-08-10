@@ -1,75 +1,27 @@
 {
-  // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
     // File Layout
-    // Корень исходников относительно которого резолвятся пути emit
     "rootDir": "./src",
-
-    // Environment Settings
-    // See also https://aka.ms/tsconfig/module
-    // Система модулей: Node.js ESM/CJS по package.json ("type", "exports")
     "module": "esnext",
-    // Версия JS на выходе: последние возможности ECMAScript
     "target": "esnext",
-    // Глобальные @types не подключаются автоматически (пустой список)
     "types": [],
     "moduleResolution": "bundler",
-
-    // Other Outputs
-    // Генерировать .map для отладки исходников
-    "sourceMap": true,
-
-    // Генерировать .d.ts для потребителей пакета
-    "declaration": true,
-
-    "declarationDir": "dist/types",
-
-    // Не создавать ts->js, только файлы декларации типов
-    "emitDeclarationOnly": true,
-
-    // Source maps для файлов деклараций
-    // В IDE потребитель может кликнуть “Go to definition” и попасть не в .d.ts, а ближе к исходному .ts,
-    // если исходники тоже опубликованы и sourcemap корректный.
-    "declarationMap": false,
-
-    // Stricter Typechecking Options
-    // Индексный доступ даёт T | undefined
+    "sourceMap": false,
+    "declaration": false,
     "noUncheckedIndexedAccess": true,
-    // optional-свойства нельзя явно задавать как undefined, если тип этого не допускает
     "exactOptionalPropertyTypes": true,
 
     // Style Options
-
-    // Ошибка на неиспользуемые локальные переменные
     "noUnusedLocals": true,
-
-    // Ошибка на неиспользуемые параметры функций
     "noUnusedParameters": true,
-
-    // Доступ к полям только через obj["key"], если есть index signature
     "noPropertyAccessFromIndexSignature": true,
-
-    // Recommended Options
-    // Включить все строгие проверки типов
     "strict": true,
-
-    // JSX без import React (новый runtime React 17+)
     "jsx": "react-jsx",
-
-    // import type/export type обязательны для тип-only импортов
     "verbatimModuleSyntax": true,
-
-    // Каждый файл — отдельный модуль (нужно для bundler’ов и transpile-only)
     "isolatedModules": true,
-
-    // Side-effect-only import без использования — ошибка
     "noUncheckedSideEffectImports": true,
-
-    // Все файлы с import/export считаются модулями
     "moduleDetection": "force",
-
-    // Не проверять типы в .d.ts из node_modules (быстрее сборка)
     "skipLibCheck": true
   },
-  "include": ["src/**/*",  "src/global.d.ts"]
+  "include": ["src/**/*", "src/global.d.ts"]
 }

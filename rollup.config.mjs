@@ -21,8 +21,8 @@ export default {
     {
       dir: 'dist',
       format: 'cjs',
-      entryFileNames: 'cjs/[name].js',
-      chunkFileNames: 'cjs/chunks/[name]-[hash].js',
+      entryFileNames: 'cjs/[name].cjs',
+      chunkFileNames: 'cjs/chunks/[name]-[hash].cjs',
     },
   ],
   external: ['react', 'react-dom', 'react/jsx-runtime', 'classnames'],
@@ -30,7 +30,7 @@ export default {
     json(),
     terser(),
     clearOutput({ targets: 'dist' }),
-    typescript({ tsconfig: './tsconfig.build.json' }),
+    typescript({ tsconfig: './tsconfig.json' }),
     postcss({
       extract: 'assets/styles.css',
       minimize: true,
