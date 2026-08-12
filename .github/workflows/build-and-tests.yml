@@ -11,6 +11,7 @@ on:
       - 'master'
       - 'dev'
   workflow_dispatch:
+  workflow_call:
 
 jobs:
   Build:
@@ -31,9 +32,6 @@ jobs:
       - name: 'Install deps'
         run: npm ci
 
-      - name: 'Build'
-        run: npm run build
-
       - name: 'Lint'
         run: npm run lint
 
@@ -48,6 +46,12 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           exitZeroOnChanges: false
+
+      - name: 'Build'
+        run: npm run build
+
+      - name: 'Checking for critical dependency vulnerabilities'
+        run: npm audit --audit-level=critical
 
       - name: 'Crete build artefact'
         uses: actions/upload-artifact@v7
