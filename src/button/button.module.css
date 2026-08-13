@@ -1,0 +1,81 @@
+:root {
+  --color-accent: #1976d2;
+  --color-text: #111827;
+  --color-surface: #ffffff;
+  --color-text-inverted: #ffffff;
+  --color-surface-muted: #e5e7eb;
+  --color-surface-strong: #374151;
+}
+
+.button {
+  appearance: none;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  min-height: 36px;
+  padding: 8px 14px;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease,
+    opacity 120ms ease;
+}
+
+.button:focus-visible {
+  outline: none;
+}
+
+.viewPrimary.colorDefault {
+  background: var(--color-accent);
+  color: var(--color-text-inverted);
+}
+
+.viewPrimary.colorInverted {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.viewSecondary.colorDefault {
+  background: var(--color-surface-muted);
+  color: var(--color-text);
+}
+
+.viewSecondary.colorInverted {
+  background: var(--color-surface-strong);
+  color: var(--color-text-inverted);
+}
+
+.viewOutlined.colorDefault {
+  background: transparent;
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.viewOutlined.colorInverted {
+  background: transparent;
+  border-color: var(--color-text-inverted);
+  color: var(--color-text-inverted);
+}
+
+.viewText.colorDefault {
+  background: transparent;
+  color: var(--color-accent);
+  padding-inline: 6px;
+}
+
+.viewText.colorInverted {
+  background: transparent;
+  color: var(--color-text-inverted);
+  padding-inline: 6px;
+}
+
+.button:not(.disabled):hover {
+  filter: brightness(0.96);
+}
+
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}

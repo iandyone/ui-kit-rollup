@@ -1,0 +1,65 @@
+:root {
+  --color-accent: #1976d2;
+  --color-danger: #d32f2f;
+  --color-text: #111827;
+  --color-text-muted: #6b7280;
+}
+
+.typography {
+  margin: 0;
+  color: var(--color-text);
+  font-family: inherit;
+}
+
+.variantH1 {
+  font-size: 32px;
+  line-height: 1.2;
+}
+
+.variantH2 {
+  font-size: 26px;
+  line-height: 1.25;
+}
+
+.variantH3 {
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+.variantBody {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.variantCaption {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.colorDefault {
+  color: var(--color-text);
+}
+
+.colorMuted {
+  color: var(--color-text-muted);
+}
+
+.colorAccent {
+  color: var(--color-accent);
+}
+
+.colorDanger {
+  color: var(--color-danger);
+}
+
+.weightRegular {
+  font-weight: 400;
+}
+
+.weightMedium {
+  font-weight: 500;
+}
+
+.weightBold {
+  font-weight: 700;
+}

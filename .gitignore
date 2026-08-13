@@ -1,3 +1,7 @@
 dist
 node_modules
 assignment.md
+*storybook.log
+storybook-static
+coverage
+chromatic.log
