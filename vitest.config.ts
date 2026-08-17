@@ -1,7 +1,6 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 import { playwright } from '@vitest/browser-playwright';
 import { defineConfig } from 'vitest/config';
@@ -25,6 +24,7 @@ export default defineConfig({
         'src/**/index.ts',
         'src/**/types.ts',
       ],
+      reporter: ['text', 'html', 'json', 'cobertura'],
     },
     projects: [
       {

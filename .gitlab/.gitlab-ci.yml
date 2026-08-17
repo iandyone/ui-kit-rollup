@@ -1,0 +1,176 @@
+image: 'node:22-alpine'
+
+variables:
+  NPM_CONFIG_CACHE: '$CI_PROJECT_DIR/.npm' # TODO: проверить работоспособность кэша
+  GLAB_ENABLE_CI_AUTOLOGIN: 'true'
+
+.rules_branch_push_or_mr: &rules_branch_push_or_mr
+  - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH'
+  - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+.rules_branch_push_mr_or_tag: &rules_branch_push_mr_or_tag
+  - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH'
+  - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+  - if: '$CI_COMMIT_TAG'
+
+.rules_master_mr: &rules_master_mr
+  - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"'
+
+.rules_master_mr_or_tag: &rules_master_mr_or_tag
+  - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"'
+  - if: '$CI_COMMIT_TAG'
+
+stages:
+  - build
+  - linting
+  - tests
+  - vulnerabilities
+  - package
+  - release
+
+cache:
+  key:
+    files:
+      - package-lock.json
+  paths:
+    - .npm/
+
+before_script:
+  - npm ci
+
+Build:
+  stage: 'build'
+  tags:
+    - internal
+  rules: *rules_branch_push_mr_or_tag
+  script:
+    - npm run build
+  artifacts:
+    when: on_success
+    paths:
+      - dist
+    name: 'build'
+    untracked: false
+    access: all
+    expire_in: '10 mins'
+
+Storybook:
+  stage: 'build'
+  tags:
+    - internal
+  rules: *rules_branch_push_or_mr
+  script:
+    - npm run build-storybook
+  artifacts:
+    when: on_success
+    paths:
+      - 'storybook-static'
+    name: 'storybook'
+    untracked: false
+    access: all
+    expire_in: '10 mins'
+
+Linting:
+  stage: 'linting'
+  tags:
+    - internal
+  rules: *rules_branch_push_or_mr
+  needs: []
+  script:
+    - npm run lint
+
+Interactions:
+  stage: 'tests'
+  tags:
+    - internal
+  image: mcr.microsoft.com/playwright:v1.62.0-noble
+  needs: []
+  rules: *rules_branch_push_or_mr
+  script:
+    - npm run test
+  artifacts:
+    when: always
+    untracked: false
+    access: all
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
+
+Chromatic:
+  stage: 'tests'
+  tags:
+    - internal
+  needs: []
+  rules: *rules_branch_push_or_mr
+  before_script:
+    - npm ci
+    - apk add --no-cache git
+  script:
+    - npx chromatic
+
+Pack:
+  stage: 'package'
+  tags:
+    - internal
+  rules: *rules_master_mr_or_tag
+  needs:
+    - job: Build
+      artifacts: true
+  script:
+    - npm pack --ignore-scripts
+  artifacts:
+    when: on_success
+    paths:
+      - '*.tgz'
+    reports:
+      dotenv: release.env
+    expire_in: '1 week'
+
+Vulnerabilities:
+  stage: 'vulnerabilities'
+  rules: *rules_master_mr
+  tags:
+    - internal
+  needs: []
+  script:
+    - npm audit --audit-level=critical
+
+Changelog:
+  stage: 'release'
+  tags:
+    - internal
+  rules:
+    - if: '$CI_COMMIT_TAG'
+  image:
+    name: orhunp/git-cliff:latest
+    entrypoint: ['']
+  variables:
+    GIT_STRATEGY: clone
+    GIT_DEPTH: 0
+  before_script: ''
+  script:
+    - git-cliff -r . > CHANGELOG.md
+  artifacts:
+    paths:
+      - CHANGELOG.md
+
+Release:
+  stage: 'release'
+  image: registry.gitlab.com/gitlab-org/cli:latest
+  tags:
+    - internal
+  rules:
+    - if: '$CI_COMMIT_TAG'
+  needs:
+    - job: Pack
+      artifacts: true
+    - job: Changelog
+      artifacts: true
+  before_script: ''
+  script: |
+    glab release create "$CI_COMMIT_TAG" \
+    --name "Release $CI_COMMIT_TAG" \
+    --notes-file CHANGELOG.md \
+    ./*.tgz \
+    --use-package-registry
